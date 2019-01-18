@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itheima.dao.AccountDao">
+    <resultMap id="baseResultMap" type="com.itheima.domain.Account">
+        <id property="id" column="id"></id>
+        <id property="name" column="name"></id>
+        <id property="money" column="money"></id>
+    </resultMap>
+    <!--
+            List<Account> findAll();
+       -->
+
+    <select id="findAll" resultMap="baseResultMap">
+        select id,name,money from account
+    </select>
+
+    <!--
+     Account findById(Integer id);
+ -->
+    <select id="findById" resultMap="baseResultMap">
+        select id,name,money from account where id =  #{id}
+    </select>
+
+    <!--
+            void insert(Account account);
+        -->
+    <insert id="insert" parameterType="com.itheima.dao.AccountDao">
+        insert into account (name,money) values (#{name},#{money})
+    </insert>
+
+    <!--
+            int update(Account account);
+        -->
+    <update id="update">
+        update account set name = #{name},money=#{money} where id=#{id}
+    </update>
+
+    <!--
+        boolean delete(Integer id);
+    -->
+    <delete id="delete" parameterType="Integer">
+        delete from account where id =#{id}
+    </delete>
+
+</mapper>
+
+

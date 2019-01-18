@@ -1,0 +1,50 @@
+ssm 框架整合。
+
+1.ssm
+    Spring + SpringMVC + Mybatis
+
+2.需求：
+    2.1 从数据库查询出信息，展示到页面上。
+        db : MySQL
+        dao : Mybatis
+        service : Spring AOP 来管理事务
+        web : SpringMVC
+        展示数据 : JSP
+
+    2.2 增加、删除、修改
+
+    dao、service、web 各个层的组件对象都由  Spring　IOC　来管理
+
+3.怎么完成?
+    我们有什么?
+        db、三层架构、三大框架
+
+    我们需要什么?   上面的需求
+
+4.怎么整合?
+    可以分两步
+    4.1 Spring 整合 Mybatis
+        由 Spring IOC 来管理数据源
+        由 Spring IOC 来管理 SqlSessionFactory 工厂的创建
+        由 Spring IOC 来管理 Mapper 代理对象的创建    --- 需要一个整合包  spring-mybatis
+        把 持久层的事务 移植到 业务层
+
+    4.2 Spring 整合 SpringMVC
+        SpringMVC 的配置文件由 SpringMVC 框架自己管理
+
+5.整合步骤
+    5.1 新建 maven 工程，打包方式 war
+    5.2 导入依赖、补全 maven工程缺失的目录
+    5.3 编写 配置文件
+        web.xml
+            spring IOC 的创建时机    ---- 在 容器启动时，就创建     ContextLoaderListener 去加载 spring 的配置文件即可
+            springMVC 的配置      ---- 前端控制器
+            中文乱码过滤器
+        spring.xml 配置文件
+        springmvc.xml 配置文件
+        mybatis.xml 配置文件   ----  可以是一个只包含头文件的空文件，也可以没有
+    5.4 编写代码，并测试
+        写好一层测试一层
+    5.5 前后台交互
+
+
